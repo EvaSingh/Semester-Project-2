@@ -1,3 +1,34 @@
+document.querySelector(".panel1").classList.remove("active");
+document.querySelector(".panel2").classList.remove("active");
+
+document.querySelector(".panel2").classList.remove("active");
+document.querySelector(".panel1").classList.add("active");
+
+function rollDie() {
+    document.querySelector(".btn-roll").addEventListener("click", function () {
+
+            let randomNumber = Math.floor(Math.random() * 6 + 1);
+               console.log(randomNumber);
+               
+            document.querySelector(".dice").src = "../Images/d" + randomNumber + ".png";
+            
+            //Move character corresponding steps
+            
+            //Check that player didn't roll a 6 and switch players if not
+            if(randomNumber != 6) {
+                switchPlayer();
+            };
+    });
+}
+
+function switchPlayer() {
+    
+    document.querySelector(".panel1").classList.toggle("active");
+    document.querySelector(".panel2").classList.toggle("active");
+}
+
+rollDie();
+
 const canvas = document.getElementById('board');
 const ctx = canvas.getContext('2d');
     

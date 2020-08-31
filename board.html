@@ -7,6 +7,11 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.typekit.net/dnn7mis.css">
   <link rel="stylesheet" href="CSS/styles.css">
+  <style>
+        .active{
+            text-decoration: underline;
+        }
+    </style>
   <title>Board game page</title>
 </head>
 <body>
@@ -18,27 +23,44 @@
             </div>
         </div>
         <div class="row">
-             <div class="col-sm-6">
-                 <h2>Player 1</h2>
-             </div>
-             <div class="col-sm-6">
-                 <h2>Player 2</h2>
-             </div>
-         </div>    
+              <div class="col">
+                  <div class="panel1 active">
+                      <div class="player1" id="name1">
+                          <h2>Player 1</h2>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col">
+                  <div class="panel2 active">
+                      <div class="player2" id="name2">
+                          <h2>Player 2</h2>
+                      </div>
+                  </div>
+              </div>
+         </div>
+    </div>    
+ 
+    <div class="container text-center">
+    <div class="row">
+        <div class="col">
+           <img src="../Images/d3.png" class="dice">
+        </div>
     </div>
-    <div class="container dices">
+</div>
+
+    <div class="container text-center">
         <div class="row">
             <div class="col">
-                
+               <button class="btn btn-primary btn-roll">Roll the die</button> 
             </div>
-        </div>  
+        </div>
     </div>
+
     <div class="container-fluid text-center board">
         <div class="row">
             <div class="col">
-                <canvas id="board"></canvas>
-            
-                
+                <canvas id="board"></canvas>   
             </div>
         </div>  
     </div>
