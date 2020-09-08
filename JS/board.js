@@ -5,7 +5,7 @@ document.querySelector(".panel2").classList.remove("active");
 document.querySelector(".panel1").classList.add("active");
 
 function rollDie() {
-    document.querySelector(".btn-roll").addEventListener("click", function () {
+    document.querySelector(".dice").addEventListener("click", function () {
 
             let randomNumber = Math.floor(Math.random() * 6 + 1);
                console.log(randomNumber);
