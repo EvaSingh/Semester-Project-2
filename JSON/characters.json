@@ -6,7 +6,7 @@
 {"id":5,"name":"Euron","description":"Self boasting ruthless madman","image":"../images/euron.jpg","token":"../images/euron-token.png"},
 {"id":6,"name":"Jamie","description":"One handed loathed swordsman","image":"../images/jamie.jpg","token":"../images/jamie-token.png"},
 {"id":7,"name":"Jon","description":"Bastard son who's not a bastard","image":"../images/jon.jpg","token":"../images/jon-token.png"},
-{"Id":8,"name":"Sansa","description":"Good girl gone to hell and back","image":"../images/sansa-white.jpg","token":"../images/sansa-token.png"},
+{"Id":8,"name":"Sansa","description":"Good girl gone to hell and back","image":"../images/sansa.jpg","token":"../images/sansa-token.png"},
 {"Id":9,"name":"Tyrion","description":"Little man with a big mouth","image":"../images/tyrion.jpg","token":"../images/tyrion-token.png"},
 {"Id":10,"name":"Varys","description":"Bald and ball-less manipulator","image":"../images/varys.jpg","token":"../images/varys-token.png"}
 ] 
