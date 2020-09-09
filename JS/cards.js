@@ -13,7 +13,7 @@ function displayCharacters(characters) {
     characters.forEach(function(character) {
         
         newHTML += `<div class="col">
-                        <div class="card">
+                        <div class="card border-0 shadow-sm" >
                             <img class="card-img-top" src=" ${character.image} " alt="">
                             <div class="card-body">
                                 <h5 class="card-title">${character.name}</h5>
