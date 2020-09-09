@@ -1,0 +1,50 @@
+/*FONTS */
+/* COLORS */
+body {
+  background-color: #FBFCFF;
+  font-family: sofia-pro-soft, sans-serif;
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+}
+
+.active {
+  text-decoration: underline;
+}
+
+.container {
+  margin-bottom: 20px;
+}
+
+.card {
+  margin-bottom: 15px;
+}
+
+@media (min-width: 576px) {
+  .logo {
+    height: 50px;
+    width: auto;
+  }
+}
+@media (min-width: 768px) {
+  .logo {
+    height: 70px;
+    width: auto;
+  }
+}
+@media (min-width: 992px) {
+  .logo {
+    height: 100px;
+    width: auto;
+  }
+}
+@media (min-width: 1200px) {
+  .logo {
+    height: 100px;
+    width: auto;
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */

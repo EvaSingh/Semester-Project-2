@@ -1,0 +1,23 @@
+/*FONTS */
+$main-font: sofia-pro-soft, sans-serif;
+
+/* COLORS */
+$primary-color: black;
+$secondary-color: #FBFCFF;
+$accent-color: #5696BF;
+
+body{
+    background-color: $secondary-color;
+    font-family: $main-font;
+}
+
+.logo{
+    height: 40px;
+    width: auto;
+}
+
+.active{
+    text-decoration: underline;
+}
+
+
