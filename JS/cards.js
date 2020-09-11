@@ -4,6 +4,7 @@ fetch("../JSON/characters.json")
     })
     .then(function (json) {
         displayCharacters(json);
+        checkBoxLimit();
     });
 
 function displayCharacters(characters) {
@@ -19,7 +20,7 @@ function displayCharacters(characters) {
                                 <h5 class="card-title">${character.name}</h5>
                                 <p class="card-text">${character.description}</p>
                                 <label class="btn btn-primary btn-block ">
-                                <input type="checkbox" autocomplete="off"> Pick me!
+                                <input type="checkbox" id=" ${character.id} " autocomplete="off"> Pick me!
                                 </label>
                             </div>
                          </div>
@@ -30,37 +31,43 @@ function displayCharacters(characters) {
        
     const characterSection = document.querySelector('.characterCards');
     characterSection.innerHTML = newHTML;
-    
-    checkBoxLimit();
 }
 
 function checkBoxLimit() {
     
 	const checkBoxButtons = document.getElementById('checkboxbuttons').getElementsByTagName("input");
-	let limit = 2;
+	const limit = 2;
+    let playerIds = [];
 	
 	for (let i = 0; i < checkBoxButtons.length; i++) {
 		checkBoxButtons[i].onclick = function() {
-        var checkedCount = 0;
+            const id = this.id;
             
-			for (let i = 0; i < checkBoxButtons.length; i++) {
-				checkedCount += (checkBoxButtons[i].checked) ? 1 : 0;
-			}
-			
-			if (checkedCount > limit) {
-				alert("Eppeppepp! Only " + limit + "!");
-				this.checked = false;
-			}
-			
-			if (checkedCount >= limit) {
-                document.querySelector(".submit").classList.remove("disabled");
-			}
+            if (this.checked) {
+                if (playerIds.length === limit) {
+                    alert("Eppeppepp! Only " + limit + "!");
+				    this.checked = false;
+                } else {
+                    playerIds.push(id);
+                }
+            } else {
+                playerIds = playerIds.filter(function(pid) { return pid !== id;});
+            }
             
-            else {
-                 document.querySelector(".submit").classList.add("disabled"); 
+            const startGameButton = document.querySelector(".submit");
+           
+			if (playerIds.length === limit) {
+                startGameButton.classList.remove("disabled");
+                startGameButton.onclick = function() {
+                    const ids = playerIds.join(',');
+                    playerIds =[];
+                    document.location.href = `board.html?${ids}`;
+                };
+			}else {
+                 startGameButton.classList.add("disabled"); 
+                 startGameButton.onclick = null;
             }
 		}
 	}
 }
 
-checkBoxLimit()
