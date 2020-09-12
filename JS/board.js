@@ -51,6 +51,9 @@ const throne = new Image();
 throne.src = "../Images/throne.png";
 const thronePosition = 1152;
 
+const obstacles = [5, 10, 15, 20, 25];
+const obstacleMessages = ["one", "two", "three", "four", "five"];
+
 fetch("../JSON/characters.json")
     .then(function (response) {
         return response.json();
@@ -58,7 +61,7 @@ fetch("../JSON/characters.json")
     .then(function(characters) {
          const selectedPlayers = window.location.search.replace('?', '').split(',');
          player1 = new Player(characters.find(c => c.id === +selectedPlayers[0]), 0, 280);
-         player2 = new Player(characters.find(c => c.id === +selectedPlayers[1]), 0, 280);
+         player2 = new Player(characters.find(c => c.id === +selectedPlayers[1]), 0, 320);
          currentPlayer = player1;      
     });
 
@@ -76,26 +79,38 @@ function drawGameArea() {
        }  
     }
     
-    ctx.drawImage(throne, thronePosition, 190, 128, 250 );
-    ctx.drawImage(player1.image, player1.x,  player1.y, 64, 120 );
-    ctx.drawImage(player2.image, player2.x,  player2.y, 64, 120 );
+    for (let i = 0; i < obstacles.length; i++) {
+        ctx.drawImage(throne, obstacles[i]*40, 360, 64, 64);
+    }
+    
+    ctx.drawImage(throne, thronePosition, 190, 128, 250);
+    ctx.drawImage(player1.image, player1.x*40,  player1.y, 64, 120 );
+    ctx.drawImage(player2.image, player2.x*40,  player2.y, 64, 120 );
+    
+    
 }
 
-function movePlayer(player, step) {
+function movePlayer(player, step, dir) {
     let currentStep = 0;
     const interval = setInterval(function() {
-        player.x += 40;
+        player.x += dir;
+        
         drawGameArea();
         
-        if(player.x >= thronePosition) {
+        if (player.x*40 >= thronePosition) {
             declareWinner(player);
         } else {
             currentStep++;
             if (currentStep > step) {
                 clearInterval(interval);
+                
+                if (obstacles.includes(player.x)) {
+                     alert("Ooops! A rock!");
+                     movePlayer(player, 3, -1);
+                }
             }
         }
-    }, 90);  
+    }, 100);  
 }
 
 function declareWinner(player) {
@@ -111,20 +126,15 @@ document.querySelector(".panel2").classList.remove("active");
 document.querySelector(".panel1").classList.add("active");
 
 document.querySelector(".dice").addEventListener("click", function () {
+    let randomNumber = Math.floor(Math.random() * 6 + 1);
 
-        let randomNumber = Math.floor(Math.random() * 6 + 1);
-           console.log(randomNumber);
+    document.querySelector(".dice").src = "../Images/d" + randomNumber + ".png";
 
-        document.querySelector(".dice").src = "../Images/d" + randomNumber + ".png";
+    movePlayer(currentPlayer, randomNumber, 1);
 
-        //Move character corresponding steps
-        movePlayer(currentPlayer, randomNumber);
-
-
-        //Check that player didn't roll a 6 and switch players if not
-        if(randomNumber != 6) {
-            switchPlayer();
-        };
+    if (randomNumber != 6) {
+        switchPlayer();
+    };
 });
 
 function switchPlayer() {
