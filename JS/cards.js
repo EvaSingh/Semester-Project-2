@@ -8,25 +8,22 @@ fetch("../JSON/characters.json")
     });
 
 function displayCharacters(characters) {
-    
     let newHTML = "";
     
     characters.forEach(function(character) {
         
         newHTML += `<div class="col">
                         <div class="card border-0 shadow-sm" >
-                            <img class="card-img-top" src=" ${character.image} " alt="">
+                            <img class="card-img-top" src="${character.image}" alt="character-image">
                             <div class="card-body">
                                 <h5 class="card-title">${character.name}</h5>
                                 <p class="card-text">${character.description}</p>
                                 <label class="btn btn-primary btn-block ">
-                                <input type="checkbox" id=" ${character.id} " autocomplete="off"> Pick me!
+                                <input type="checkbox" id="${character.id}" autocomplete="off"> Pick me!
                                 </label>
                             </div>
                          </div>
-                    </div>`;  
-        
-        
+                    </div>`;   
     });
        
     const characterSection = document.querySelector('.characterCards');
@@ -34,8 +31,7 @@ function displayCharacters(characters) {
 }
 
 function checkBoxLimit() {
-    
-	const checkBoxButtons = document.getElementById('checkboxbuttons').getElementsByTagName("input");
+    const checkBoxButtons = document.getElementById('checkboxbuttons').getElementsByTagName("input");
 	const limit = 2;
     let playerIds = [];
 	
@@ -47,11 +43,11 @@ function checkBoxLimit() {
                 if (playerIds.length === limit) {
                     alert("Eppeppepp! Only " + limit + "!");
 				    this.checked = false;
-                } else {
+                }else {
                     playerIds.push(id);
                 }
             } else {
-                playerIds = playerIds.filter(function(pid) { return pid !== id;});
+                playerIds = playerIds.filter(function(pid) {return pid !== id;});
             }
             
             const startGameButton = document.querySelector(".submit");
@@ -70,4 +66,3 @@ function checkBoxLimit() {
 		}
 	}
 }
-
