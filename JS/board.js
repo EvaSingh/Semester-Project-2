@@ -1,4 +1,4 @@
-//Game Area
+//Set up game area
 
 const tileSize = 40;
 
@@ -30,8 +30,18 @@ const map = {
     ]
  };
 
+const rock = new Image();
+rock.src = "../Images/rock.png";
+
+const throne = new Image();
+throne.src = "../Images/throne.png";
+const thronePosition = 1152;
+
+const obstacles = [5, 10, 15, 20, 25];
+
 function Player(character, x, y) {
     this.id = character.id;
+    this.name = character.name;
     this.image = new Image();
     this.image.addEventListener('load', () => drawGameArea(), false);
     this.image.src = character.token;
@@ -39,20 +49,10 @@ function Player(character, x, y) {
     this.y = y;
 }
 
-const canvas = document.getElementById('game-area');
-const ctx = canvas.getContext('2d');
-ctx.canvas.width = map.width;
-ctx.canvas.height = map.height;
+//Get selected players
 
 let player1, player2;
 let currentPlayer;
-
-const throne = new Image();
-throne.src = "../Images/throne.png";
-const thronePosition = 1152;
-
-const obstacles = [5, 10, 15, 20, 25];
-const obstacleMessages = ["one", "two", "three", "four", "five"];
 
 fetch("../JSON/characters.json")
     .then(function (response) {
@@ -62,14 +62,24 @@ fetch("../JSON/characters.json")
          const selectedPlayers = window.location.search.replace('?', '').split(',');
          player1 = new Player(characters.find(c => c.id === +selectedPlayers[0]), 0, 280);
          player2 = new Player(characters.find(c => c.id === +selectedPlayers[1]), 0, 320);
-         currentPlayer = player1;      
+         currentPlayer = player1; 
+         
+         document.querySelector(".player-1").innerHTML = `<h2>${player1.name}</h2>`;
+         document.querySelector(".player-2").innerHTML = `<h2>${player2.name}</h2>`;
     });
 
+//Draw game area
+
+const canvas = document.getElementById('game-area');
+const ctx = canvas.getContext('2d');
+ctx.canvas.width = map.width;
+ctx.canvas.height = map.height;
+
 function drawGameArea() {
-    var mapIndex = 0;
+    let mapIndex = 0;
 
     for (let top = 0; top < map.height; top += tileSize){
-        for(var left =0; left < map.width; left += tileSize) {
+        for(let left =0; left < map.width; left += tileSize) {
            const tileValue = map.tiles[mapIndex];
            const tile = tileColors[tileValue];
 
@@ -79,16 +89,17 @@ function drawGameArea() {
        }  
     }
     
-    for (let i = 0; i < obstacles.length; i++) {
-        ctx.drawImage(throne, obstacles[i]*40, 360, 64, 64);
-    }
-    
     ctx.drawImage(throne, thronePosition, 190, 128, 250);
     ctx.drawImage(player1.image, player1.x*40,  player1.y, 64, 120 );
-    ctx.drawImage(player2.image, player2.x*40,  player2.y, 64, 120 );
     
+    for (let i = 0; i < obstacles.length; i++) {
+        ctx.drawImage(rock, obstacles[i]*40, 390, 64, 32);
+    }
     
+    ctx.drawImage(player2.image, player2.x*40,  player2.y, 64, 120 );   
 }
+
+//Move players
 
 function movePlayer(player, step, dir) {
     let currentStep = 0;
@@ -105,12 +116,12 @@ function movePlayer(player, step, dir) {
                 clearInterval(interval);
                 
                 if (obstacles.includes(player.x)) {
-                     alert("Ooops! A rock!");
+                     alert("Ooops! Stumled on a rock!");
                      movePlayer(player, 3, -1);
                 }
             }
         }
-    }, 100);  
+    }, 90);  
 }
 
 function declareWinner(player) {
@@ -119,11 +130,11 @@ function declareWinner(player) {
  
 //Die roll
 
-document.querySelector(".panel1").classList.remove("active");
-document.querySelector(".panel2").classList.remove("active");
+document.querySelector(".panel-1").classList.remove("active");
+document.querySelector(".panel-2").classList.remove("active");
 
-document.querySelector(".panel2").classList.remove("active");
-document.querySelector(".panel1").classList.add("active");
+document.querySelector(".panel-2").classList.remove("active");
+document.querySelector(".panel-1").classList.add("active");
 
 document.querySelector(".dice").addEventListener("click", function () {
     let randomNumber = Math.floor(Math.random() * 6 + 1);
@@ -138,7 +149,7 @@ document.querySelector(".dice").addEventListener("click", function () {
 });
 
 function switchPlayer() {
-    document.querySelector(".panel1").classList.toggle("active");
-    document.querySelector(".panel2").classList.toggle("active");
+    document.querySelector(".panel-1").classList.toggle("active");
+    document.querySelector(".panel-2").classList.toggle("active");
     currentPlayer = currentPlayer === player1 ? player2 : player1;
 }

@@ -1,3 +1,5 @@
+//Get winning player
+
 fetch("../JSON/characters.json")
     .then(function (response) {
         return response.json();
@@ -6,10 +8,10 @@ fetch("../JSON/characters.json")
         const winnerId = window.location.search.replace('?', '');
         const winner = characters.find(c => c.id === +winnerId);
 
-        document.getElementById("winner").src = winner.token;
+        document.querySelector(".winner").src = winner.token;
     });
-    
-//Canvas animation
+
+//Draw and animate banner
 
 const ctx = document.getElementById("banner").getContext("2d");
 let path = 0;
@@ -17,7 +19,7 @@ let movingRight = true;
 
 function drawText(path) {
     ctx.font = "bold 40px Sofia-Pro-Soft";
-    ctx.fillStyle = "#52ce90";
+    ctx.fillStyle = "#038C33";
     ctx.fillText("Winner!", path, 100);
 }
 

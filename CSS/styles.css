@@ -5,13 +5,18 @@ body {
   font-family: sofia-pro-soft, sans-serif;
 }
 
+.active {
+  text-decoration: underline;
+}
+
 .logo {
   height: 40px;
   width: auto;
 }
 
-.active {
-  text-decoration: underline;
+.dice {
+  height: 100px;
+  width: auto;
 }
 
 .container {

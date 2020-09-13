@@ -1,10 +1,12 @@
+//Get characters and display cards
+
 fetch("../JSON/characters.json")
     .then(function (response) {
         return response.json();
     })
     .then(function (json) {
         displayCharacters(json);
-        checkBoxLimit();
+        setUpCheckboxes();
     });
 
 function displayCharacters(characters) {
@@ -26,12 +28,12 @@ function displayCharacters(characters) {
                     </div>`;   
     });
        
-    const characterSection = document.querySelector('.characterCards');
+    const characterSection = document.querySelector('.character-cards');
     characterSection.innerHTML = newHTML;
 }
 
-function checkBoxLimit() {
-    const checkBoxButtons = document.getElementById('checkboxbuttons').getElementsByTagName("input");
+function setUpCheckboxes() {
+    const checkBoxButtons = document.getElementById('checkbox-buttons').getElementsByTagName("input");
 	const limit = 2;
     let playerIds = [];
 	
@@ -41,9 +43,9 @@ function checkBoxLimit() {
             
             if (this.checked) {
                 if (playerIds.length === limit) {
-                    alert("Eppeppepp! Only " + limit + "!");
+                    alert("Oy! Only " + limit + "!");
 				    this.checked = false;
-                }else {
+                } else {
                     playerIds.push(id);
                 }
             } else {
